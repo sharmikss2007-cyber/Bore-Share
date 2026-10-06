@@ -1,0 +1,6 @@
+{
+  "name": "BoreShare - Village Water Sharing",
+  "description": "A lightweight mobile web prototype for farmers to view borewell water status, update availability, and request water sharing during summer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
