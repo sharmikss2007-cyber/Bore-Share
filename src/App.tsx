@@ -158,7 +158,6 @@ export default function App() {
               borewells={borewells}
               lang={lang}
               onRequestWater={handleRequestWater}
-              onSubmitRequest={handleCreateRequest}
               onGoToReport={handleGoToReport}
             />
           )}

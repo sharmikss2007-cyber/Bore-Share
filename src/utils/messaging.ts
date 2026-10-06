@@ -1,50 +1,56 @@
 import { Language } from '../types';
-
-export function getCleanPhoneNumber(phone: string): string {
-  // Strip non-digits
-  const digits = phone.replace(/\D/g, '');
-  if (digits.length === 10) {
-    return `91${digits}`;
-  }
-  if (digits.length > 10 && digits.startsWith('91')) {
-    return digits;
-  }
-  return digits.length > 0 ? digits : '919826144520';
-}
+import { getSanitizedWhatsAppNumber } from '../config/whatsapp';
 
 export function buildWaterRequestMessage(params: {
   borewellName: string;
   ownerName: string;
   requesterName: string;
-  requestMessage: string;
+  requestMessage?: string;
   lang: Language;
 }): string {
   const { borewellName, ownerName, requesterName, requestMessage, lang } = params;
 
   if (lang === 'ta') {
+    const details = requestMessage?.trim() 
+      ? requestMessage.trim() 
+      : 'தண்ணீர் பகிர முடியுமா என்று தெரியப்படுத்தவும்.';
+
     return (
       `வணக்கம் ${ownerName},\n` +
-      `நான் ${requesterName}. உங்கள் போர்வெல்லான "${borewellName}"லிருந்து தண்ணீர் பகிரும்படி கேட்டுக்கொள்கிறேன்.\n\n` +
-      `கோரிக்கை: "${requestMessage}"\n\n` +
-      `— போர்ஷேர் (கிராம நீர் பகிர்வு வலைத்தளம்)`
+      `நான் ${requesterName}, ${borewellName} லிருந்து தண்ணீர் பெற விரும்புகிறேன்.\n` +
+      `${details}\n` +
+      `நன்றி.`
     );
   }
 
+  // English format
+  const details = requestMessage?.trim() 
+    ? requestMessage.trim() 
+    : 'Please let me know if water can be shared.';
+
   return (
     `Hello ${ownerName},\n` +
-    `This is ${requesterName}. I would like to request water sharing from your borewell: "${borewellName}".\n\n` +
-    `Request: "${requestMessage}"\n\n` +
-    `— Sent via BoreShare (Village Water Sharing)`
+    `I am ${requesterName} and I would like to request water from ${borewellName}.\n` +
+    `${details}\n` +
+    `Thank you.`
   );
 }
 
-export function buildWhatsAppUrl(phone: string, text: string): string {
-  const cleanPhone = getCleanPhoneNumber(phone);
+/**
+ * Builds the official wa.me link:
+ * https://wa.me/PHONE_NUMBER?text=ENCODED_MESSAGE
+ * Works on Android, iOS, and WhatsApp Web on desktop browsers.
+ */
+export function buildWhatsAppUrl(rawPhone: string, text: string): string {
+  const cleanPhone = getSanitizedWhatsAppNumber(rawPhone);
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
 }
 
-export function buildSmsUrl(phone: string, text: string): string {
-  const cleanPhone = getCleanPhoneNumber(phone);
-  // SMS standard URI with recipient & prefilled body
+/**
+ * Builds the native mobile SMS link:
+ * sms:+PHONE_NUMBER?body=ENCODED_MESSAGE
+ */
+export function buildSmsUrl(rawPhone: string, text: string): string {
+  const cleanPhone = getSanitizedWhatsAppNumber(rawPhone);
   return `sms:+${cleanPhone}?body=${encodeURIComponent(text)}`;
 }

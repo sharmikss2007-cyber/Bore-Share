@@ -13,13 +13,10 @@ import {
   Sparkles,
   Info
 } from 'lucide-react';
-import { RequestCommunicationModal } from './RequestCommunicationModal';
-
 interface Props {
   borewells: Borewell[];
   lang: Language;
   onRequestWater: (borewellId: string) => void;
-  onSubmitRequest: (request: Omit<import('../types').WaterRequest, 'id' | 'timestamp' | 'status'>) => import('../types').WaterRequest;
   onGoToReport: (borewellId?: string) => void;
 }
 
@@ -27,12 +24,10 @@ export const VillageStatusScreen: React.FC<Props> = ({
   borewells,
   lang,
   onRequestWater,
-  onSubmitRequest,
   onGoToReport,
 }) => {
   const [filter, setFilter] = useState<'ALL' | WaterStatus>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [modalBorewell, setModalBorewell] = useState<Borewell | null>(null);
   const t = TRANSLATIONS[lang];
 
   // Counts
@@ -324,7 +319,7 @@ export const VillageStatusScreen: React.FC<Props> = ({
                 {/* Primary Action Button */}
                 {isAvailable && (
                   <button
-                    onClick={() => setModalBorewell(borewell)}
+                    onClick={() => onRequestWater(borewell.id)}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow-xs transition-colors cursor-pointer"
                   >
                     <span>{t.requestWater}</span>
@@ -334,7 +329,7 @@ export const VillageStatusScreen: React.FC<Props> = ({
 
                 {isLimited && (
                   <button
-                    onClick={() => setModalBorewell(borewell)}
+                    onClick={() => onRequestWater(borewell.id)}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
                   >
                     <span>{t.requestWater} ({t.limited})</span>
@@ -381,19 +376,6 @@ export const VillageStatusScreen: React.FC<Props> = ({
           </p>
         </div>
       </div>
-
-      {/* WhatsApp / SMS Communication Modal */}
-      <RequestCommunicationModal
-        isOpen={modalBorewell !== null}
-        onClose={() => setModalBorewell(null)}
-        borewell={modalBorewell}
-        lang={lang}
-        onSubmitRequest={onSubmitRequest}
-        onOpenFullForm={(id) => {
-          setModalBorewell(null);
-          onRequestWater(id);
-        }}
-      />
     </div>
   );
 };

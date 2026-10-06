@@ -9,6 +9,7 @@ export interface Borewell {
   status: WaterStatus;
   lastUpdated: string; // ISO string
   notes?: string;
+  ownerWhatsApp?: string;
 }
 
 export interface WaterRequest {

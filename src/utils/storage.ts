@@ -1,5 +1,6 @@
 import { Borewell, WaterRequest, WaterStatus } from '../types';
 import { INITIAL_BOREWELLS, INITIAL_REQUESTS } from '../data/initialData';
+import { DEFAULT_OWNER_WHATSAPP, DISPLAY_PHONE_NUMBER } from '../config/whatsapp';
 
 const BOREWELLS_KEY = 'boreshare_borewells_v1';
 const REQUESTS_KEY = 'boreshare_requests_v1';
@@ -13,7 +14,12 @@ export function loadBorewells(): Borewell[] {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+      // Ensure ownerWhatsApp and phone match the configured number
+      return parsed.map((b) => ({
+        ...b,
+        phone: DISPLAY_PHONE_NUMBER,
+        ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
+      }));
     }
     return INITIAL_BOREWELLS;
   } catch (e) {

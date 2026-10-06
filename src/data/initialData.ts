@@ -1,4 +1,5 @@
 import { Borewell, WaterRequest } from '../types';
+import { DEFAULT_OWNER_WHATSAPP, DISPLAY_PHONE_NUMBER } from '../config/whatsapp';
 
 export const VILLAGE_INFO = {
   name: 'Rampur Khurd',
@@ -13,7 +14,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-1',
     borewellName: 'Badi Khet Main Borewell',
     farmerName: 'Ramesh Patel',
-    phone: '98261 44520',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'North Field (Plot #12)',
     status: 'AVAILABLE',
     lastUpdated: new Date(Date.now() - 25 * 60 * 1000).toISOString(), // 25 mins ago
@@ -23,7 +25,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-2',
     borewellName: 'Canal Road Tubewell',
     farmerName: 'Suresh Yadav',
-    phone: '94250 88319',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'Near Old Canal Bridge',
     status: 'AVAILABLE',
     lastUpdated: new Date(Date.now() - 55 * 60 * 1000).toISOString(), // 55 mins ago
@@ -33,7 +36,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-3',
     borewellName: 'East Meadow Submersible',
     farmerName: 'Jagdish Verma',
-    phone: '97541 33290',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'East Meadow (Plot #29)',
     status: 'LIMITED',
     lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
@@ -43,7 +47,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-4',
     borewellName: 'Well #4 Old Orchard',
     farmerName: 'Balram Singh Thakur',
-    phone: '98930 11244',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'Mango Orchard Sector',
     status: 'NO_WATER',
     lastUpdated: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
@@ -53,7 +58,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-5',
     borewellName: 'South Slope Solar Pump',
     farmerName: 'Sunita Devi',
-    phone: '96300 77412',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'South Terraced Field',
     status: 'AVAILABLE',
     lastUpdated: new Date(Date.now() - 80 * 60 * 1000).toISOString(), // 1 hr 20 mins ago
@@ -63,7 +69,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-6',
     borewellName: 'Panchayat Boundary Borewell',
     farmerName: 'Kamal Kishore Sharma',
-    phone: '99775 66031',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'West Road Border',
     status: 'LIMITED',
     lastUpdated: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(), // 3 hours ago
@@ -73,7 +80,8 @@ export const INITIAL_BOREWELLS: Borewell[] = [
     id: 'bw-7',
     borewellName: 'Deep Rock Borewell #2',
     farmerName: 'Mukesh Choudhary',
-    phone: '94071 55982',
+    phone: DISPLAY_PHONE_NUMBER,
+    ownerWhatsApp: DEFAULT_OWNER_WHATSAPP,
     location: 'Rocky Ridge Zone',
     status: 'NO_WATER',
     lastUpdated: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), // 6 hours ago
